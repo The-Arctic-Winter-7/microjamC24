@@ -30,10 +30,12 @@ namespace bar
 
    int bar_snap_em_up::total_frames() const
    {
+      return 300;
    }
 
    mj::game_result bar_snap_em_up::play(const mj::game_data &data)
    {
+      
    }
 
    bool bar_snap_em_up::victory() const
