@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mj_game.h"
+#include "mj/mj_game.h"
 
 // All game functionality/classes/fields
 namespace bar 
