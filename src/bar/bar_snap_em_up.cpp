@@ -23,7 +23,7 @@ namespace bar
    {
    }
 
-   bn::string<16> bar_snap_em_up::title() const
+   bn::string<16> bar_snap_em_up::title() const 
    {
       return "Snap Em Up!";
    }
@@ -33,9 +33,10 @@ namespace bar
       return 300;
    }
 
-   mj::game_result bar_snap_em_up::play(const mj::game_data &data)
+   mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
    {
-      
+      mj::game_result result(victory(), false);
+      return result;
    }
 
    bool bar_snap_em_up::victory() const
