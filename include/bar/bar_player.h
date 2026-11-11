@@ -7,8 +7,8 @@
 #include <bn_rect.h>
 #include <bn_keypad.h>
 
-#include "bar/bar_bouncer.h"
-#include "bar/bar_create_bounding_box.h"
+#include "bar_bouncer.h"
+#include "bar_create_bounding_box.h"
 
 #include "bn_sprite_items_bar_box.h"
 
