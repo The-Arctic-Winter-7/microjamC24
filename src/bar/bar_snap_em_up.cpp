@@ -1,6 +1,8 @@
 #include "bar_snap_em_up.h"
 #include "mj/mj_game_list.h"
 
+#include <bn_log.h>
+
 #define FLOOR (80 - 16)
 #define CEILING (-72 - 8)
 
@@ -68,7 +70,9 @@ namespace bar
    {
       // for (bar_bouncer &bouncers : bouncer)
       _bouncer.update();
-      _player.update(bouncer);
+      _player.update(_bouncer);
+
+      BN_LOG("Hit! | ", _bouncer._is_hit);
 
       /*for (int i = bouncer.size() - 1; i >= 0; i--)
       {
@@ -89,11 +93,7 @@ namespace bar
 
    bool bar_snap_em_up::victory() const
    {
-<<<<<<< HEAD
       return _bouncer._is_collided;
-=======
-      return _player.intercepted_bounce();
->>>>>>> 8d2cd43268453d3369301f9ca081cb4c34e2bd95
    }
 
    void bar_snap_em_up::fade_in([[maybe_unused]] const mj::game_data &data)

@@ -30,9 +30,9 @@ namespace bar
         /**
          * Reads from the bumpers and triggers one of the arms to move.
          */
-        void update(bn::vector<bar_bouncer, MAX_BOUNCERS> &bouncers);
+        void update(bar_bouncer &bouncer);
 
-        bool intercepted_bounce();
+        //bool intercepted_bounce();
 
     private:
         // The sprite to display the player

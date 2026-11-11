@@ -10,17 +10,17 @@ namespace bar
     {
     }
 
-    void bar_player::update(bn::vector<bar_bouncer, MAX_BOUNCERS> &bouncers)
+    void bar_player::update(bar_bouncer &bouncer)
     {
         //_update_animation();
 
-        for (bar_bouncer &bouncer : bouncers)
-        {
+       // for (bar_bouncer &bouncer : bouncers)
+       // {
             if (bn::keypad::l_pressed() && _bounding_box.intersects(bouncer._bounding_box)) {
                 bouncer._is_collided = true;
                 is_hit = true;
             }
-        }
+       // }
         _bounding_box = bar_create_bounding_box(_sprite, _size);
     }
 
@@ -37,7 +37,7 @@ namespace bar
         // }
     }
 
-    bool bar::bar_player::intercepted_bounce() {
-        return is_hit;
-    }
+   // bool bar::bar_player::intercepted_bounce() {
+   //     return is_hit;
+   // }
 }
