@@ -44,11 +44,11 @@ namespace bar
       return false;
    }
 
-   void bar_snap_em_up::fade_in(const mj::game_data &data)
+   void bar_snap_em_up::fade_in([[maybe_unused]]const mj::game_data &data)
    {
    }
 
-   void bar_snap_em_up::fade_out(const mj::game_data &data)
+   void bar_snap_em_up::fade_out([[maybe_unused]]const mj::game_data &data)
    {
    }
 
