@@ -19,7 +19,7 @@ namespace bar
     {
 
     public:
-        static constexpr int MAX_BOUNCERS = 12;
+        static constexpr int MAX_BOUNCERS = 5;
 
         /**
          * @param player_position_x where the player is spawned on the x axis. The character will be static.

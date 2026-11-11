@@ -1,9 +1,10 @@
 #pragma once
 
 #include "mj/mj_game.h"
-#include "bar_player.h"
-#include "bar_bouncer.h"
-#include "bar_create_bounding_box.h"
+#include "bar/bar_player.h"
+#include "bar/bar_bouncer.h"
+#include "bar/bar_create_bounding_box.h"
+#include "bar/bar_spawn_bouncer.h"
 
 // All game functionality/classes/fields
 namespace bar 

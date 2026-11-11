@@ -26,17 +26,19 @@ namespace bar
    bn::size player_size = {8, 8};
 
    bn::fixed bounce_position_x = bn::display::width() / 2;
-   bn::fixed bounce_position_y = CEILING;
+   bn::fixed bounce_position_y = 0;
    bn::size bounce_size = {8, 8};
+   bn::fixed bounce_speed;
 
    bn::vector<bar_bouncer, bar_player::MAX_BOUNCERS> bouncer = {};
 
    int game_timer = 0;
 
-   bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int complete_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
+   bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
       _player(bar_player(player_position_x, player_position_y, player_size)), 
-      _bouncer(bar_bouncer(bounce_position_x, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(complete_games, data)), bounce_size))
+      _bouncer(bar_bouncer(bounce_position_x, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games, data)), bounce_size))
    {
+      bn::fixed bounce_speed = _recommended_bounce_speed(recommended_difficulty_level(completed_games, data));
    }
 
    bn::string<16> bar_snap_em_up::title() const 
@@ -64,7 +66,11 @@ namespace bar
    {
       _player.update(bouncer);
 
-      
+      if(game_timer >= 60) {
+         game_timer = 0;
+         //bar_spawn_bouncer(bouncer, bounce_position_x, bounce_position_y, bounce_speed, bounce_size);
+         bouncer.push_back(_bouncer);
+      }
 
       game_timer++;
       mj::game_result result(victory(), false);
