@@ -1,4 +1,4 @@
-#include "bar_create_bounding_box"
+#include "bar/bar_create_bounding_box.h"
 
 bn::rect bar_create_bounding_box(bn::sprite_ptr sprite, bn::size box_size)
 {

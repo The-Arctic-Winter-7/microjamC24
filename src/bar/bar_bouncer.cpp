@@ -2,8 +2,9 @@
 
 namespace bar
 {
-    bar_bouncer::bar_bouncer(bn::fixed x_start, bn::fixed y_start, bn::fixed base_speed) : _sprite(bn::sprite_items::bar_bouncer.create_sprite(x_start, y_start)),
-                                                                                      _horizontal_speed(base_speed), _is_hit(false)
+    bar_bouncer::bar_bouncer(bn::fixed x_start, bn::fixed y_start, bn::fixed base_speed, bn::size bouncer_size) : _sprite(bn::sprite_items::bar_bouncer.create_sprite(x_start, y_start)),
+                                                                                                                  _horizontal_speed(base_speed), _size(bouncer_size),
+                                                                                                                  _bounding_box(bar_create_bounding_box(_sprite, bouncer_size)), _is_hit(false), _is_collided(false)
     {
     }
 
@@ -11,15 +12,21 @@ namespace bar
     {
         bn::fixed y = _sprite.y();
 
-        if(!_is_hit) {
+        _is_collided = false;
+
+        if (!_is_hit)
+        {
             y += _horizontal_speed;
-        } else {
+        }
+        else
+        {
             y -= _horizontal_speed;
         }
 
-        if(y <= MIN_Y) {
+        if (y <= MIN_Y)
+        {
             _is_hit = false;
         }
-        
+        _bounding_box = bar_create_bounding_box(_sprite, _size);
     }
 }
