@@ -65,6 +65,7 @@ namespace bar
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
    {
       _player.update(bouncer);
+      for(bar_bouncer &bouncers : bouncer) bouncers.update();
 
       if(game_timer >= 60) {
          game_timer = 0;
