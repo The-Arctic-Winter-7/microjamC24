@@ -111,6 +111,9 @@ Answer the following questions. Consider using online searches or AI for help, b
 ### Updating from upstream
 Follow the instructions in the [Git Branching Cheatsheet](./gitBranchingCheatsheet.md) to update from the upstream. Then, ENSURE YOU ARE BACK ON A BRANCH OTHER THAN MAIN TO CONTINUE WORK. Following these instructions will pull in the new updates from your classmates to the game. In the future, always do this before starting work so that you will stay up-to-date and lessen the chance of merge conflicts.
 
+### Making a new branch
+Make a NEW branch to continue your work from. Branch off of the exisiting branch you created for waves 0-3.
+
 ### Creating a game header
 In this section we will be making a header file that holds the class declaration for your game. I STRONGLY recommend looking at ```include/mj/mj_game.h``` for reference and ```include/aub/aub_test_game.h``` for an example.
 1. In the `include/xxx` directory (where xxx is your 3 letter identifier) make a file ```xxx_game_name.h``` (where xxx and game_name are replaced with your identifier and what you want to call the game).
@@ -131,7 +134,7 @@ In this section we will be making a header file that holds the class declaration
 ### Creating a dummy implementation
 In this section we will make a dummy implementation of your game. We will make sure everything is set up properly before implementing the actual game logic. I STRONGLY recommend looking at ```src/aub/aub_test_game.cpp``` for an example.
 
-1. Create a `src/xxx/xxx_game_name.cpp` file.
+1. Create a `src/xxx/xxx_game_name.cpp` file. For any file you create going forward, please have it start with your 3 letter prefix and an underscore, e.g. `xxx_`.
 1. Include your header you created.
 1. Make a namespace `xxx`.
 1. Create an implementation for your constructor. You can leave the body of the constructor empty, but you MUST call the superclass constructor (`mj::game`) as the first item in your initializer list. Call the superclass constructor with your 3 letter id: `mj::game("xxx")`. You can see `src/aub/aub_test_game.cpp` for an example.
@@ -198,7 +201,7 @@ Once you have a prototype ready for review, make a PR from your branch. Make a N
 In this wave you will implement the rest of the gameplay functionality and handle difficulty. You do not yet need to have the graphics/sound perfect, but the gameplay will have all of the game mechanics you need implemented.
 
 ### Pre-reqs
-If you have feedback on a PR, PLEASE RESOLVE THOSE ISSUES BEFORE WORKING ON NEW FUNCTIONALITY.
+If you have feedback on a PR, PLEASE RESOLVE THOSE ISSUES BEFORE WORKING ON NEW FUNCTIONALITY. Make a NEW BRANCH to continue your work.
 
 #### Resolving issues
 
