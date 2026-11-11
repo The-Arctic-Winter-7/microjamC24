@@ -27,6 +27,9 @@ namespace bar
         {
             _is_hit = false;
         }
+
+        _sprite.set_y(y);
+
         _bounding_box = bar_create_bounding_box(_sprite, _size);
     }
 }
