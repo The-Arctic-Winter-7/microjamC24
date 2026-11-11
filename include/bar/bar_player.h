@@ -32,6 +32,8 @@ namespace bar
          */
         void update(bn::vector<bar_bouncer, MAX_BOUNCERS> &bouncers);
 
+        bool intercepted_bounce();
+
     private:
         // The sprite to display the player
         bn::sprite_ptr _sprite;

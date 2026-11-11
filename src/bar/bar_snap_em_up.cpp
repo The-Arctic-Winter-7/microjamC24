@@ -79,7 +79,7 @@ namespace bar
 
    bool bar_snap_em_up::victory() const
    {
-      return false;
+      return _player.intercepted_bounce();
    }
 
    void bar_snap_em_up::fade_in([[maybe_unused]]const mj::game_data &data)
