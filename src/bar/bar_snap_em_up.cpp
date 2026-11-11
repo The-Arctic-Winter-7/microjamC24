@@ -2,7 +2,7 @@
 #include "mj/mj_game_list.h"
 
 #define FLOOR (80 - 8)
-#define CEILING (80 + 8)
+#define CEILING (-72 - 8)
 
 namespace 
 {
@@ -21,12 +21,12 @@ MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 
 namespace bar
 {
-   bn::fixed player_position_x = bn::display::width() / 2;
+   bn::fixed player_position_x = bn::display::width() / 20;
    bn::fixed player_position_y = FLOOR;
-   bn::size player_size = {8, 8};
+   bn::size player_size = {64, 64};
 
-   bn::fixed bounce_position_x = bn::display::width() / 2;
-   bn::fixed bounce_position_y = 0;
+   bn::fixed bounce_position_x = bn::display::width() / 20;
+   bn::fixed bounce_position_y = CEILING;
    bn::size bounce_size = {8, 8};
    bn::fixed bounce_speed;
 
