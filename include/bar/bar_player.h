@@ -27,7 +27,7 @@ namespace bar
         private:
             // The sprite to display the player
             bn::sprite_ptr _sprite;
-            bn::sprite_animate_action _sprite_action;
+            bn::sprite_animate_action<4> _sprite_action;
 
             /**
              * Reads from the d-pad and sets direction sprites is pointing.
