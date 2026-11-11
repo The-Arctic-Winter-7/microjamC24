@@ -23,12 +23,14 @@ namespace bar
 
     void bar::bar_player::_update_animation()
     {
-        if (bn::keypad::a_pressed())
-        {
-        }
+        
 
-        if (bn::keypad::b_pressed())
-        {
-        }
+        // if (bn::keypad::a_pressed())
+        // {
+        // }
+
+        // if (bn::keypad::b_pressed())
+        // {
+        // }
     }
 }
