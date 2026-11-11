@@ -1,15 +1,15 @@
 #include "bar_snap_em_up.h"
 #include "mj/mj_game_list.h"
 
-#define FLOOR (80 - 8)
+#define FLOOR (80 - 16)
 #define CEILING (-72 - 8)
 
-namespace 
+namespace
 {
-    constexpr bn::string_view code_credits[] = { "TheArticWinter, crex424" };
-    constexpr bn::string_view graphics_credits[] = { "To Be Announced" };
-    constexpr bn::string_view sfx_credits[] = {"To Be Announced"};
-    constexpr bn::string_view music_credits[] = {"To Be Announced"};
+   constexpr bn::string_view code_credits[] = {"TheArticWinter, crex424"};
+   constexpr bn::string_view graphics_credits[] = {"To Be Announced"};
+   constexpr bn::string_view sfx_credits[] = {"To Be Announced"};
+   constexpr bn::string_view music_credits[] = {"To Be Announced"};
 }
 
 // Macros used to add game to game list
@@ -35,13 +35,13 @@ namespace bar
    int game_timer = 0;
 
    bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
-      _player(bar_player(player_position_x, player_position_y, player_size)), 
-      _bouncer(bar_bouncer(bounce_position_x, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games, data)), bounce_size))
+                                                                                                                      _player(bar_player(player_position_x, player_position_y, player_size)),
+                                                                                                                      _bouncer(bar_bouncer(bounce_position_x, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games, data)), bounce_size))
    {
       bn::fixed bounce_speed = _recommended_bounce_speed(recommended_difficulty_level(completed_games, data));
    }
 
-   bn::string<16> bar_snap_em_up::title() const 
+   bn::string<16> bar_snap_em_up::title() const
    {
       return "Snap Em Up!";
    }
@@ -51,12 +51,14 @@ namespace bar
       return 300;
    }
 
-   bn::fixed bar_snap_em_up::_recommended_bounce_speed(mj::difficulty_level difficulty) 
+   bn::fixed bar_snap_em_up::_recommended_bounce_speed(mj::difficulty_level difficulty)
    {
       if (difficulty == mj::difficulty_level::EASY)
       {
          return 1;
-      } else if (difficulty == mj::difficulty_level::NORMAL) {
+      }
+      else if (difficulty == mj::difficulty_level::NORMAL)
+      {
          return 2;
       }
       return 3;
@@ -64,13 +66,20 @@ namespace bar
 
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
    {
+      // for (bar_bouncer &bouncers : bouncer)
+      _bouncer.update();
       _player.update(bouncer);
-      for(bar_bouncer &bouncers : bouncer) bouncers.update();
 
-      if(game_timer >= 60) {
+      /*for (int i = bouncer.size() - 1; i >= 0; i--)
+      {
+         if (bouncer[i]._is_collided)
+            bouncer.erase(bouncer.begin() + i);
+      }*/
+
+      if (game_timer >= 60)
+      {
          game_timer = 0;
-         //bar_spawn_bouncer(bouncer, bounce_position_x, bounce_position_y, bounce_speed, bounce_size);
-         bouncer.push_back(_bouncer);
+         // bouncer.push_back(_bouncer);
       }
 
       game_timer++;
@@ -80,15 +89,16 @@ namespace bar
 
    bool bar_snap_em_up::victory() const
    {
-      return false;
+      return _bouncer._is_collided;
    }
 
-   void bar_snap_em_up::fade_in([[maybe_unused]]const mj::game_data &data)
+   void bar_snap_em_up::fade_in([[maybe_unused]] const mj::game_data &data)
    {
    }
 
-   void bar_snap_em_up::fade_out([[maybe_unused]]const mj::game_data &data)
+   void bar_snap_em_up::fade_out([[maybe_unused]] const mj::game_data &data)
    {
+      bouncer.clear();
    }
 
 }
