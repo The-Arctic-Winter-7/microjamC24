@@ -1,6 +1,8 @@
 #include "bar_snap_em_up.h"
 #include "mj/mj_game_list.h"
 
+#define FLOOR (80 - 8)
+#define CEILING (80 + 8)
 
 namespace 
 {
@@ -19,7 +21,19 @@ MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 
 namespace bar
 {
-   bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int complete_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar")
+   bn::fixed player_position_x = bn::display::width() / 2;
+   bn::fixed player_position_y = FLOOR;
+   bn::size player_size = {8, 8};
+
+   bn::fixed bounce_position_x = bn::display::width() / 2;
+   bn::fixed bounce_position_y = CEILING;
+   bn::size bounce_size = {8, 8};
+
+   bn::vector<bar_bouncer, bar_player::MAX_BOUNCERS> bouncer = {};
+
+   bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int complete_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
+      _player(bar_player(player_position_x, player_position_y, player_size)), 
+      _bouncer(bar_bouncer(bounce_position_x, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(complete_games, data)), bounce_size))
    {
    }
 
@@ -33,8 +47,20 @@ namespace bar
       return 300;
    }
 
+   bn::fixed bar_snap_em_up::_recommended_bounce_speed(mj::difficulty_level difficulty) 
+   {
+      if (difficulty == mj::difficulty_level::EASY)
+      {
+         return 1;
+      } else if (difficulty == mj::difficulty_level::NORMAL) {
+         return 2;
+      }
+      return 3;
+   }
+
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
    {
+      _player.update(bouncer);
       mj::game_result result(victory(), false);
       return result;
    }
