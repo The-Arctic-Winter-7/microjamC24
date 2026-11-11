@@ -31,6 +31,8 @@ namespace bar
 
    bn::vector<bar_bouncer, bar_player::MAX_BOUNCERS> bouncer = {};
 
+   int game_timer = 0;
+
    bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int complete_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
       _player(bar_player(player_position_x, player_position_y, player_size)), 
       _bouncer(bar_bouncer(bounce_position_x, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(complete_games, data)), bounce_size))
@@ -61,6 +63,10 @@ namespace bar
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
    {
       _player.update(bouncer);
+
+      
+
+      game_timer++;
       mj::game_result result(victory(), false);
       return result;
    }
