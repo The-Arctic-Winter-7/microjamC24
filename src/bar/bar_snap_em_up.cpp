@@ -30,7 +30,6 @@ namespace bar
    bn::fixed bounce_position_x = bn::display::width() / 20;
    bn::fixed bounce_position_y = CEILING;
    bn::size bounce_size = {8, 8};
-   bn::fixed bounce_speed;
 
    bn::vector<bar_bouncer, bar_player::MAX_BOUNCERS> bouncer = {};
 
@@ -40,7 +39,6 @@ namespace bar
                                                                                                                       _player(bar_player(player_position_x, player_position_y, player_size)),
                                                                                                                       _bouncer(bar_bouncer(bounce_position_x, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games, data)), bounce_size))
    {
-      bn::fixed bounce_speed = _recommended_bounce_speed(recommended_difficulty_level(completed_games, data));
    }
 
    bn::string<16> bar_snap_em_up::title() const
