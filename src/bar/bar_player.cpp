@@ -14,19 +14,19 @@ namespace bar
     {
         //_update_animation();
 
-       // for (bar_bouncer &bouncer : bouncers)
-       // {
-            if (bn::keypad::l_pressed() && _bounding_box.intersects(bouncer._bounding_box)) {
-                bouncer._is_collided = true;
-                is_hit = true;
-            }
-       // }
+        // for (bar_bouncer &bouncer : bouncers)
+        // {
+        if (bn::keypad::l_pressed() && _bounding_box.intersects(bouncer._bounding_box))
+        {
+            bouncer._is_collided = true;
+            is_hit = true;
+        }
+        // }
         _bounding_box = bar_create_bounding_box(_sprite, _size);
     }
 
     void bar::bar_player::_update_animation()
     {
-        
 
         // if (bn::keypad::a_pressed())
         // {
@@ -37,7 +37,7 @@ namespace bar
         // }
     }
 
-   // bool bar::bar_player::intercepted_bounce() {
-   //     return is_hit;
-   // }
+    // bool bar::bar_player::intercepted_bounce() {
+    //     return is_hit;
+    // }
 }
