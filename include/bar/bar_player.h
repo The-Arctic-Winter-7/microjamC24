@@ -28,9 +28,12 @@ namespace bar
         /**
          * Reads from the bumpers and triggers one of the arms to move.
          */
-        void update(bar_bouncer &bouncer);
+        void update_lower_left(bar_bouncer &bouncer);
 
-        static constexpr int get_max_bouncers() {
+        void update_lower_right(bar_bouncer &bouncer);
+
+        static constexpr int get_max_bouncers()
+        {
             return MAX_BOUNCERS;
         }
 

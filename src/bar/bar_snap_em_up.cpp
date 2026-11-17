@@ -35,8 +35,8 @@ namespace bar
    int TARGET_COUNT = 5;
 
    int game_timer = 0;
-   int bouncer_spawned_count = 0;
    int bouncer_hit_count = 0;
+   int kraken_lives = 3;
    int completed_games_global;
 
    bn::random rng_spawn;
@@ -50,7 +50,7 @@ namespace bar
 
       game_timer = 0;
       bouncer_hit_count = 0;
-      bouncer_spawned_count = 1;
+      kraken_lives = 3;
       bouncer_target_reached = false;
       rng_spawn = data.random;
       completed_games_global = completed_games;
@@ -68,7 +68,7 @@ namespace bar
 
    int bar_snap_em_up::total_frames() const
    {
-      return 450;
+      return 180;
    }
 
    bn::fixed bar_snap_em_up::_recommended_bounce_speed(mj::difficulty_level difficulty)
@@ -83,7 +83,8 @@ namespace bar
          TARGET_COUNT = 7;
          return 2.5;
       }
-      else if (difficulty == mj::difficulty_level::HARD) {
+      else if (difficulty == mj::difficulty_level::HARD)
+      {
          TARGET_COUNT = 8;
          return 3.2;
       }
@@ -94,13 +95,13 @@ namespace bar
    {
       if (difficulty == mj::difficulty_level::EASY)
       {
-         return 60;
+         return 20;
       }
       else if (difficulty == mj::difficulty_level::NORMAL)
       {
-         return 45;
+         return 15;
       }
-      return 30;
+      return 10;
    }
 
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
@@ -108,8 +109,8 @@ namespace bar
       for (bar_bouncer &bouncer : _bouncers)
       {
          bouncer.update();
-         _player_arms[0].update(bouncer);
-         _player_arms[1].update(bouncer);
+         _player_arms[0].update_lower_right(bouncer);
+         _player_arms[1].update_lower_left(bouncer);
       }
 
       for (int i = _bouncers.size() - 1; i >= 0; i--)
@@ -119,16 +120,20 @@ namespace bar
             _bouncers.erase(_bouncers.begin() + i);
             bouncer_hit_count++;
          }
+         if (_bouncers[i].get_sprite().y() >= FLOOR)
+         {
+            _bouncers.erase(_bouncers.begin() + i);
+            kraken_lives--;
+         }
       }
 
-      if (game_timer >= _recommended_spawn_speed(recommended_difficulty_level(completed_games_global, data)) && bouncer_spawned_count < TARGET_COUNT)
+      if (game_timer >= _recommended_spawn_speed(recommended_difficulty_level(completed_games_global, data)))
       {
          game_timer = 0;
          if (rng_spawn.get_unbiased_int(0, 2) == 0)
             bar_spawn_bouncer(_bouncers, position_left, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games_global, data)), bounce_size);
          else
             bar_spawn_bouncer(_bouncers, position_right, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games_global, data)), bounce_size);
-         bouncer_spawned_count++;
          rng_spawn = data.random;
       }
 
@@ -153,5 +158,4 @@ namespace bar
    {
       _bouncers.clear();
    }
-
 }
