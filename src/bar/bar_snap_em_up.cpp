@@ -30,8 +30,6 @@ namespace bar
    bn::fixed bounce_position_y = CEILING;
    bn::size bounce_size = {8, 8};
 
-   // bn::vector<bar_bouncer, bar_player::get_max_bouncers()> bouncer = {};
-
    int TARGET_COUNT = 5;
 
    int game_timer = 0;
@@ -47,7 +45,6 @@ namespace bar
                                                                                                                       _player_arms(),
                                                                                                                       _bouncers()
    {
-
       game_timer = 0;
       bouncer_hit_count = 0;
       kraken_lives = 3;

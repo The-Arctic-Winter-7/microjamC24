@@ -29,41 +29,13 @@ namespace bar
          */
         void update();
 
-        bn::sprite_ptr get_sprite() const {
-            return _sprite;
-        }
+        bn::sprite_ptr get_sprite() const;
 
-        bn::fixed get_speed() const {
-            return _vertical_speed;
-        }
+        bn::rect get_bounding_box() const;
 
-        bn::size get_size() const {
-            return _size;
-        }
+        bool is_collided() const;
 
-        bn::rect get_bounding_box() const {
-            return _bounding_box;
-        }
-
-        void set_bounding_box(bn::sprite_ptr sprite, bn::size size) {
-            _bounding_box = bar_create_bounding_box(sprite, size);
-        }
-
-        bool is_hit() const {
-            return _hit;
-        }
-
-        void set_hit(bool set_status) {
-            _hit = set_status;
-        }
-
-        bool is_collided() const {
-            return _collided;
-        }
-
-        void set_collided(bool set_status) {
-            _collided = set_status;
-        }
+        void set_collided(bool set_status);
 
     private:
         // The bounds of the screen

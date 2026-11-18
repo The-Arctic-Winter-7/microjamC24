@@ -32,14 +32,11 @@ namespace bar
 
         void update_lower_right(bar_bouncer &bouncer);
 
-        static constexpr int get_max_bouncers()
-        {
-            return MAX_BOUNCERS;
-        }
+        int get_max_bouncers() const;
 
     private:
         static constexpr int MAX_BOUNCERS = 5;
-
+        
         // The sprite to display the player
         bn::sprite_ptr _sprite;
         bn::sprite_animate_action<4> _sprite_action;
