@@ -24,8 +24,8 @@ MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 
 namespace bar
 {
-   bn::fixed position_left = bn::display::width() / 20;
-   bn::fixed position_right = bn::display::width() / -20;
+   bn::fixed position_left = -32;
+   bn::fixed position_right = 32;
 
    bn::fixed player_position_y = 20;
    bn::size player_size = {16, 16};
@@ -77,17 +77,17 @@ namespace bar
       if (difficulty == mj::difficulty_level::EASY)
       {
          TARGET_COUNT = 6;
-         return 2;
+         return 1.5;
       }
       else if (difficulty == mj::difficulty_level::NORMAL)
       {
          TARGET_COUNT = 7;
-         return 2.5;
+         return 2;
       }
       else if (difficulty == mj::difficulty_level::HARD)
       {
          TARGET_COUNT = 8;
-         return 3.2;
+         return 2.2;
       }
       return 1;
    }
@@ -110,8 +110,8 @@ namespace bar
       for (bar_bouncer &bouncer : _bouncers)
       {
          bouncer.update();
-         _player_arms[0].update_lower_right(bouncer);
-         _player_arms[1].update_lower_left(bouncer);
+         _player_arms[0].update_lower_left(bouncer);
+         _player_arms[1].update_lower_right(bouncer);
       }
 
       for (int i = _bouncers.size() - 1; i >= 0; i--)
