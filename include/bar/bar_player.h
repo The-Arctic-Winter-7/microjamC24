@@ -32,7 +32,9 @@ namespace bar
 
         void update_lower_right(bar_bouncer &bouncer);
 
-        int get_max_bouncers() const;
+        static constexpr int get_max_bouncers() {
+            return MAX_BOUNCERS;
+        }
 
     private:
         static constexpr int MAX_BOUNCERS = 5;
