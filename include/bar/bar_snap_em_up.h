@@ -1,6 +1,8 @@
 #pragma once
 
 #include <bn_vector.h>
+#include <bn_regular_bg_ptr.h>
+
 
 #include "mj/mj_game.h"
 #include "bar/bar_player.h"
@@ -31,6 +33,7 @@ namespace bar
     private:
         bn::vector<bar_player, 2> _player_arms;
         bn::vector<bar_bouncer, bar_player::get_max_bouncers()> _bouncers;
+        bn::regular_bg_ptr _background;
         bn::fixed _recommended_bounce_speed(mj::difficulty_level difficulty);
         bn::fixed _recommended_spawn_speed(mj::difficulty_level difficulty);
     };
