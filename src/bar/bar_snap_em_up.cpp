@@ -1,6 +1,9 @@
 #include "bar_snap_em_up.h"
 #include "mj/mj_game_list.h"
 
+#include "bn_regular_bg_items_bar_ocean.h"
+
+
 #define FLOOR (80 - 16)
 #define CEILING (-72 - 8)
 
@@ -43,7 +46,8 @@ namespace bar
 
    bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
                                                                                                                       _player_arms(),
-                                                                                                                      _bouncers()
+                                                                                                                      _bouncers(),
+                                                                                                                      _background(bn::regular_bg_items::bar_ocean.create_bg())
    {
       game_timer = 0;
       bouncer_hit_count = 0;
