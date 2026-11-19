@@ -26,11 +26,6 @@ namespace bar
         _bounding_box = bar_create_bounding_box(_sprite, _size);
     }
 
-    int bar_player::get_max_bouncers() const
-    {
-        return MAX_BOUNCERS;
-    }
-
     void bar::bar_player::_update_animation()
     {
     }
