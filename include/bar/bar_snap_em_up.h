@@ -40,7 +40,7 @@ namespace bar
         bn::regular_bg_ptr _background;
         bn::sprite_ptr _kraken;
         bn::random &rng;
-        bn::sprite_animate_action<4> kraken_animation;
+        bn::sprite_animate_action<5> kraken_animation;
         bn::fixed _recommended_bounce_speed(mj::difficulty_level difficulty);
         bn::fixed _recommended_spawn_speed(mj::difficulty_level difficulty);
         int _recommended_target_count(mj::difficulty_level difficulty);
