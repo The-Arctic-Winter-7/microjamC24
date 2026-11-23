@@ -7,9 +7,9 @@
 
 #include "mj/mj_game.h"
 #include "bar/bar_player.h"
-#include "bar/bar_bouncer.h"
+#include "bar/bar_coin.h"
 #include "bar/bar_create_bounding_box.h"
-#include "bar/bar_spawn_bouncer.h"
+#include "bar/bar_spawn_coin.h"
 #include "bn_sprite_items_bar_kraken.h"
 #include "bar_constants.h"
 
@@ -36,18 +36,18 @@ namespace bar
 
     private:
         bn::vector<bar_player, 2> _player_arms;
-        bn::vector<bar_bouncer, MAX_BOUNCERS> _bouncers;
+        bn::vector<bar_coin, MAX_COINS> _coins;
         bn::regular_bg_ptr _background;
         bn::sprite_ptr _kraken;
         bn::random &rng;
         bn::sprite_animate_action<5> kraken_animation;
-        bn::fixed _recommended_bounce_speed(mj::difficulty_level difficulty);
+        bn::fixed _recommended_coin_speed(mj::difficulty_level difficulty);
         bn::fixed _recommended_spawn_speed(mj::difficulty_level difficulty);
         int _recommended_target_count(mj::difficulty_level difficulty);
-        int bouncer_hit_count;
+        int coin_hit_count;
         int completed_games_global;
         int game_timer;
         int kraken_lives;
-        bool bouncer_target_reached;
+        bool coin_target_reached;
     };
 }

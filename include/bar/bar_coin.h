@@ -11,7 +11,7 @@
 
 namespace bar
 {
-    class bar_bouncer
+    class bar_coin
     {
     public:
         /**
@@ -21,7 +21,7 @@ namespace bar
          *  @param start_x The starting x coordinate the bouncer spawns at
          *  @param start_y The starting y coordinate the bouncer spawns at
          */
-        bar_bouncer(bn::fixed x_start, bn::fixed y_start, bn::fixed base_speed, bn::size bouncer_size);
+        bar_coin(bn::fixed x_start, bn::fixed y_start, bn::fixed base_speed, bn::size coin_size);
 
         /**
          *  Updates the position of the Bouncer sprite by checking whether or not it's position is greater
