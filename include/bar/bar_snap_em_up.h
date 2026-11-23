@@ -12,7 +12,7 @@
 #include "bn_sprite_items_bar_kraken.h"
 
 
-// All game functionality/classes/fields
+// All game functionality, classes, fields
 namespace bar
 {
     class bar_snap_em_up : public mj::game
