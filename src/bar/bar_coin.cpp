@@ -3,6 +3,7 @@
 namespace bar
 {
     bar_coin::bar_coin(bn::fixed x_start, bn::fixed y_start, bn::fixed base_speed, bn::size coin_size) : _sprite(bn::sprite_items::bar_coin.create_sprite(x_start, y_start)),
+                                                                                                                  coin_animation(bn::create_sprite_animate_action_forever(_sprite, 10, bn::sprite_items::bar_coin.tiles_item(), 0, 1, 2, 1)),
                                                                                                                   _vertical_speed(base_speed), _size(coin_size),
                                                                                                                   _bounding_box(bar_create_bounding_box(_sprite, coin_size))
     {
@@ -13,6 +14,7 @@ namespace bar
         _collided = false;
         _sprite.set_y(_sprite.y() + _vertical_speed);
         _bounding_box = bar_create_bounding_box(_sprite, _size);
+        coin_animation.update();
     }
 
     bn::sprite_ptr bar_coin::get_sprite() const {
