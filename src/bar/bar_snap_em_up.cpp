@@ -38,7 +38,7 @@ namespace bar
                                                                                                                       _background(bn::regular_bg_items::bar_ocean.create_bg()),
                                                                                                                       _kraken(bn::sprite_items::bar_kraken.create_sprite(0, FLOOR - 15)),
                                                                                                                       rng(data.random),
-                                                                                                                      kraken_animation(bn::create_sprite_animate_action_forever(_kraken, 10, bn::sprite_items::bar_kraken.tiles_item(), 0, 1, 2, 0))
+                                                                                                                      kraken_animation(bn::create_sprite_animate_action_forever(_kraken, 10, bn::sprite_items::bar_kraken.tiles_item(), 0, 1, 2, 1, 0))
    {
       game_timer = 0;
       bouncer_hit_count = 0;
