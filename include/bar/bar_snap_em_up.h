@@ -35,18 +35,17 @@ namespace bar
 
     private:
         bn::vector<bar_player, 2> _player_arms;
+        bn::vector<bar_bouncer, MAX_BOUNCERS> _bouncers;
         bn::regular_bg_ptr _background;
         bn::sprite_ptr _kraken;
-        bn::vector<bar_bouncer, MAX_BOUNCERS> _bouncers;
+        bn::random &rng_spawn;
         bn::fixed _recommended_bounce_speed(mj::difficulty_level difficulty);
         bn::fixed _recommended_spawn_speed(mj::difficulty_level difficulty);
         int _recommended_target_count(mj::difficulty_level difficulty);
-        int bouncer_spawned_count;
         int bouncer_hit_count;
         int completed_games_global;
         int game_timer;
         int kraken_lives;
-        bn::random &rng_spawn;
         bool bouncer_target_reached;
     };
 }

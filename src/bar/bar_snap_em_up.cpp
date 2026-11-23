@@ -24,8 +24,8 @@ MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 
 namespace bar
 {
-   static constexpr bn::fixed position_left = bn::display::width() / 20;
-   static constexpr bn::fixed position_right = bn::display::width() / -20;
+   static constexpr bn::fixed position_left = -32;
+   static constexpr bn::fixed position_right = 32;
 
    static constexpr bn::fixed player_position_y = 20;
    static constexpr bn::size player_size = {16, 16};
@@ -59,7 +59,7 @@ namespace bar
 
    int bar_snap_em_up::total_frames() const
    {
-      return 180;
+      return 250;
    }
 
    bn::fixed bar_snap_em_up::_recommended_bounce_speed(mj::difficulty_level difficulty)
@@ -83,13 +83,13 @@ namespace bar
    {
       if (difficulty == mj::difficulty_level::EASY)
       {
-         return 20;
+         return 35;
       }
       else if (difficulty == mj::difficulty_level::NORMAL)
       {
-         return 15;
+         return 28;
       }
-      return 10;
+      return 19;
    }
 
    int bar_snap_em_up::_recommended_target_count(mj::difficulty_level difficulty)
@@ -124,11 +124,11 @@ namespace bar
          if (_bouncers[i].get_sprite().y() >= FLOOR)
          {
             _bouncers.erase(_bouncers.begin() + i);
-            kraken_lives--;
+            //kraken_lives--;
          }
       }
 
-      if (game_timer >= _recommended_spawn_speed(recommended_difficulty_level(completed_games_global, data)) && bouncer_spawned_count < _recommended_target_count(recommended_difficulty_level(completed_games_global, data)))
+      if (game_timer >= _recommended_spawn_speed(recommended_difficulty_level(completed_games_global, data)))
       {
          bn::fixed random_pos;
          game_timer = 0;
@@ -139,7 +139,6 @@ namespace bar
             random_pos = position_right;
 
          bar_spawn_bouncer(_bouncers, random_pos, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games_global, data)), bounce_size);
-         bouncer_spawned_count++;
          rng_spawn = data.random;
       }
 
