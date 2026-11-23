@@ -59,7 +59,7 @@ namespace bar
 
    int bar_snap_em_up::total_frames() const
    {
-      return 250;
+      return 300;
    }
 
    bn::fixed bar_snap_em_up::_recommended_bounce_speed(mj::difficulty_level difficulty)
@@ -96,13 +96,13 @@ namespace bar
    {
       if (difficulty == mj::difficulty_level::EASY)
       {
-         return 6;
+         return 5;
       }
       else if (difficulty == mj::difficulty_level::NORMAL)
       {
          return 7;
       }
-      return 8;
+      return 10;
    }
 
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)

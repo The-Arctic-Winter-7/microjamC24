@@ -2,7 +2,7 @@
 
 namespace bar
 {
-    bar_bouncer::bar_bouncer(bn::fixed x_start, bn::fixed y_start, bn::fixed base_speed, bn::size bouncer_size) : _sprite(bn::sprite_items::bar_bouncer.create_sprite(x_start, y_start)),
+    bar_bouncer::bar_bouncer(bn::fixed x_start, bn::fixed y_start, bn::fixed base_speed, bn::size bouncer_size) : _sprite(bn::sprite_items::bar_coin.create_sprite(x_start, y_start)),
                                                                                                                   _vertical_speed(base_speed), _size(bouncer_size),
                                                                                                                   _bounding_box(bar_create_bounding_box(_sprite, bouncer_size))
     {

@@ -7,7 +7,7 @@
 
 #include "bar/bar_create_bounding_box.h"
 
-#include "bn_sprite_items_bar_bouncer.h"
+#include "bn_sprite_items_bar_coin.h"
 
 namespace bar
 {
