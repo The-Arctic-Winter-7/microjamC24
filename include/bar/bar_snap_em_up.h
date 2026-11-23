@@ -2,6 +2,7 @@
 
 #include <bn_vector.h>
 #include <bn_regular_bg_ptr.h>
+#include <bn_sprite_animate_actions.h>
 
 
 #include "mj/mj_game.h"
@@ -38,7 +39,8 @@ namespace bar
         bn::vector<bar_bouncer, MAX_BOUNCERS> _bouncers;
         bn::regular_bg_ptr _background;
         bn::sprite_ptr _kraken;
-        bn::random &rng_spawn;
+        bn::random &rng;
+        bn::sprite_animate_action<4> kraken_animation;
         bn::fixed _recommended_bounce_speed(mj::difficulty_level difficulty);
         bn::fixed _recommended_spawn_speed(mj::difficulty_level difficulty);
         int _recommended_target_count(mj::difficulty_level difficulty);

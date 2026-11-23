@@ -3,7 +3,6 @@
 
 #include "bn_regular_bg_items_bar_ocean.h"
 
-
 #define FLOOR (80 - 16)
 #define CEILING (-72 - 8)
 
@@ -38,7 +37,8 @@ namespace bar
                                                                                                                       _bouncers(),
                                                                                                                       _background(bn::regular_bg_items::bar_ocean.create_bg()),
                                                                                                                       _kraken(bn::sprite_items::bar_kraken.create_sprite(0, FLOOR - 15)),
-                                                                                                                      rng_spawn(data.random)
+                                                                                                                      rng(data.random),
+                                                                                                                      kraken_animation(bn::create_sprite_animate_action_forever(_kraken, 10, bn::sprite_items::bar_kraken.tiles_item(), 0, 1, 2, 0))
    {
       game_timer = 0;
       bouncer_hit_count = 0;
@@ -107,6 +107,7 @@ namespace bar
 
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
    {
+      kraken_animation.update();
       for (bar_bouncer &bouncer : _bouncers)
       {
          bouncer.update();
@@ -124,22 +125,23 @@ namespace bar
          if (_bouncers[i].get_sprite().y() >= FLOOR)
          {
             _bouncers.erase(_bouncers.begin() + i);
-            //kraken_lives--;
+            // kraken_lives--;
          }
       }
 
       if (game_timer >= _recommended_spawn_speed(recommended_difficulty_level(completed_games_global, data)))
       {
+         // Spawn Rate Logic
          bn::fixed random_pos;
          game_timer = 0;
 
-         if (rng_spawn.get_bool())
+         if (rng.get_bool())
             random_pos = position_left;
          else
             random_pos = position_right;
 
          bar_spawn_bouncer(_bouncers, random_pos, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games_global, data)), bounce_size);
-         rng_spawn = data.random;
+         rng = data.random;
       }
 
       if (bouncer_hit_count == _recommended_target_count(recommended_difficulty_level(completed_games_global, data)))
