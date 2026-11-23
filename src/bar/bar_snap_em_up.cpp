@@ -24,37 +24,26 @@ MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 
 namespace bar
 {
-   bn::fixed position_left = -32;
-   bn::fixed position_right = 32;
+   static constexpr bn::fixed position_left = bn::display::width() / 20;
+   static constexpr bn::fixed position_right = bn::display::width() / -20;
 
-   bn::fixed player_position_y = 20;
-   bn::size player_size = {16, 16};
+   static constexpr bn::fixed player_position_y = 20;
+   static constexpr bn::size player_size = {16, 16};
 
-   bn::fixed bounce_position_y = CEILING;
-   bn::size bounce_size = {8, 8};
-
-   int TARGET_COUNT = 5;
-
-   int game_timer = 0;
-   int bouncer_hit_count = 0;
-   int kraken_lives = 3;
-   int completed_games_global;
-
-   bn::random rng_spawn;
-
-   bool bouncer_target_reached = false;
+   static constexpr bn::fixed bounce_position_y = CEILING;
+   static constexpr bn::size bounce_size = {8, 8};
 
    bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
                                                                                                                       _player_arms(),
                                                                                                                       _bouncers(),
                                                                                                                       _background(bn::regular_bg_items::bar_ocean.create_bg()),
-                                                                                                                      _kraken(bn::sprite_items::bar_kraken.create_sprite(0, FLOOR - 15))
+                                                                                                                      _kraken(bn::sprite_items::bar_kraken.create_sprite(0, FLOOR - 15)),
+                                                                                                                      rng_spawn(data.random)
    {
       game_timer = 0;
       bouncer_hit_count = 0;
       kraken_lives = 3;
       bouncer_target_reached = false;
-      rng_spawn = data.random;
       completed_games_global = completed_games;
 
       _player_arms.push_back(bar_player(position_left, player_position_y, player_size));
@@ -77,18 +66,15 @@ namespace bar
    {
       if (difficulty == mj::difficulty_level::EASY)
       {
-         TARGET_COUNT = 6;
-         return 1.5;
+         return 2;
       }
       else if (difficulty == mj::difficulty_level::NORMAL)
       {
-         TARGET_COUNT = 7;
-         return 2;
+         return 2.5;
       }
       else if (difficulty == mj::difficulty_level::HARD)
       {
-         TARGET_COUNT = 8;
-         return 2.2;
+         return 3.2;
       }
       return 1;
    }
@@ -104,6 +90,19 @@ namespace bar
          return 15;
       }
       return 10;
+   }
+
+   int bar_snap_em_up::_recommended_target_count(mj::difficulty_level difficulty)
+   {
+      if (difficulty == mj::difficulty_level::EASY)
+      {
+         return 6;
+      }
+      else if (difficulty == mj::difficulty_level::NORMAL)
+      {
+         return 7;
+      }
+      return 8;
    }
 
    mj::game_result bar_snap_em_up::play([[maybe_unused]] const mj::game_data &data)
@@ -129,17 +128,22 @@ namespace bar
          }
       }
 
-      if (game_timer >= _recommended_spawn_speed(recommended_difficulty_level(completed_games_global, data)))
+      if (game_timer >= _recommended_spawn_speed(recommended_difficulty_level(completed_games_global, data)) && bouncer_spawned_count < _recommended_target_count(recommended_difficulty_level(completed_games_global, data)))
       {
+         bn::fixed random_pos;
          game_timer = 0;
-         if (rng_spawn.get_unbiased_int(0, 2) == 0)
-            bar_spawn_bouncer(_bouncers, position_left, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games_global, data)), bounce_size);
+
+         if (rng_spawn.get_bool())
+            random_pos = position_left;
          else
-            bar_spawn_bouncer(_bouncers, position_right, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games_global, data)), bounce_size);
+            random_pos = position_right;
+
+         bar_spawn_bouncer(_bouncers, random_pos, bounce_position_y, _recommended_bounce_speed(recommended_difficulty_level(completed_games_global, data)), bounce_size);
+         bouncer_spawned_count++;
          rng_spawn = data.random;
       }
 
-      if (bouncer_hit_count == TARGET_COUNT)
+      if (bouncer_hit_count == _recommended_target_count(recommended_difficulty_level(completed_games_global, data)))
          bouncer_target_reached = true;
 
       game_timer++;

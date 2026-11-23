@@ -15,8 +15,7 @@ namespace bar
         _bounding_box = bar_create_bounding_box(_sprite, _size);
     }
 
-    bn::sprite_ptr bar_bouncer::get_sprite() const
-    {
+    bn::sprite_ptr bar_bouncer::get_sprite() const {
         return _sprite;
     }
 

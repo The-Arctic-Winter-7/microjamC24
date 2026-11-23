@@ -10,6 +10,7 @@
 #include "bar/bar_create_bounding_box.h"
 #include "bar/bar_spawn_bouncer.h"
 #include "bn_sprite_items_bar_kraken.h"
+#include "bar_constants.h"
 
 
 // All game functionality, classes, fields
@@ -34,10 +35,18 @@ namespace bar
 
     private:
         bn::vector<bar_player, 2> _player_arms;
-        bn::vector<bar_bouncer, bar_player::get_max_bouncers()> _bouncers;
         bn::regular_bg_ptr _background;
         bn::sprite_ptr _kraken;
+        bn::vector<bar_bouncer, MAX_BOUNCERS> _bouncers;
         bn::fixed _recommended_bounce_speed(mj::difficulty_level difficulty);
         bn::fixed _recommended_spawn_speed(mj::difficulty_level difficulty);
+        int _recommended_target_count(mj::difficulty_level difficulty);
+        int bouncer_spawned_count;
+        int bouncer_hit_count;
+        int completed_games_global;
+        int game_timer;
+        int kraken_lives;
+        bn::random &rng_spawn;
+        bool bouncer_target_reached;
     };
 }
