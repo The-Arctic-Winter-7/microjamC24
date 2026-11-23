@@ -47,7 +47,8 @@ namespace bar
    bar_snap_em_up::bar_snap_em_up([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("bar"),
                                                                                                                       _player_arms(),
                                                                                                                       _bouncers(),
-                                                                                                                      _background(bn::regular_bg_items::bar_ocean.create_bg())
+                                                                                                                      _background(bn::regular_bg_items::bar_ocean.create_bg()),
+                                                                                                                      _kraken(bn::sprite_items::bar_kraken.create_sprite(0, FLOOR - 15))
    {
       game_timer = 0;
       bouncer_hit_count = 0;
