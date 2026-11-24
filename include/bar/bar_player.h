@@ -10,7 +10,7 @@
 #include "bar_coin.h"
 #include "bar_create_bounding_box.h"
 
-#include "bn_sprite_items_bar_box.h"
+#include "bn_sprite_items_bar_ring.h"
 
 // All game functions/classes/variables/constants scoped to the namespace
 namespace bar
